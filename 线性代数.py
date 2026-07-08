@@ -198,3 +198,31 @@ print(f"A / sum_A (每行归一化) = \n{A / sum_A}")
 # 按axis=0（列）累加，不保持维度
 print(f"A = \n{A}")
 print(f"A.cumsum(axis=0) = \n{A.cumsum(axis=0)}")
+
+# =============================================================================
+# 第12节：点积（Dot Product）
+# =============================================================================
+# torch.dot(x, y) 计算两个向量的点积：对应元素相乘后求和
+# 等价于 torch.sum(x * y)
+# 点积结果是一个标量
+
+print("\n" + "=" * 60)
+print("第12节：点积（Dot Product）")
+print("=" * 60)
+x = torch.arange(4, dtype=torch.float32)
+y = torch.ones(4, dtype=torch.float32)
+print(f"x = {x}")
+print(f"y = {y}")
+print(f"torch.dot(x, y) = {torch.dot(x, y)}")          # 1*4 + 2*5 + 3*6 = 32
+print(f"torch.sum(x * y) = {torch.sum(x * y)}")        # 验证：结果相同
+
+
+
+A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
+print(f"A = \n{A}")
+x = torch.arange(4, dtype=torch.float32)
+print(f"x = {x}")
+
+
+
+
