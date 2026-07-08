@@ -139,6 +139,8 @@ print(f"A.sum() = {A.sum()}")  # 0到19相加 = 190
 print("\n" + "=" * 60)
 print("第9节：按轴（axis）求和")
 print("=" * 60)
+A = torch.arange(20).reshape(5, 4)
+print(f"A = \n{A}")
 A_sum_axis0 = A.sum(axis=0)
 print(f"A = \n{A}")
 print(f"A.sum(axis=0) = {A_sum_axis0}")       # 每列求和
@@ -153,3 +155,46 @@ print(f"A_sum_axis1.shape = {A_sum_axis1.shape}")
 
 # axis=[0, 1]：同时沿两个轴求和，结果为标量，等价于 A.sum()
 print(f"A.sum(axis=[0, 1]) = {A.sum(axis=[0, 1])}")
+
+
+# =============================================================================
+# 第10节：均值与非均值求和
+# =============================================================================
+# .mean() 计算张量所有元素的平均值
+# .numel() 返回张量的元素总数
+# 验证：mean() 等于 sum() / numel()
+print("\n" + "=" * 60)
+print("第10节：均值与非均值求和")
+print("=" * 60)
+A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
+print(f"A = \n{A}")
+print(f"A.mean() = {A.mean()}")                      # 所有元素的平均值
+print(f"A.sum() / A.numel() = {A.sum() / A.numel()}")  # 验证均值
+
+# 按axis=0（列）求均值，验证：mean(axis=0) 等于 sum(axis=0) / shape[0]
+print(f"A.mean(axis=0) = {A.mean(axis=0)}")                    # 每列均值
+print(f"A.sum(axis=0) / A.shape[0] = {A.sum(axis=0) / A.shape[0]}")  # 验证
+
+# =============================================================================
+# 第11节：累加求和（cumsum）
+# =============================================================================
+# .cumsum(axis=0) 沿指定轴的累加和，每元素是到该位置为止的累计和
+# keepdims=True 保持维度，使得广播运算时形状兼容
+
+print("\n" + "=" * 60)
+print("第11节：累加求和（cumsum）与 keepdims")
+print("=" * 60)
+A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
+print(f"A = \n{A}")
+
+# 按行累加，keepdims=True 保持二维形状 (5, 1)，便于广播除法
+sum_A = A.sum(axis=1, keepdims=True)  # shape: (5, 4) -> (5, 1)
+print(f"A.sum(axis=1, keepdims=True) = \n{sum_A}")
+print(f"sum_A.shape = {sum_A.shape}")
+
+# 广播：A 的每行除以该行的总和（归一化）
+print(f"A / sum_A (每行归一化) = \n{A / sum_A}")
+
+# 按axis=0（列）累加，不保持维度
+print(f"A = \n{A}")
+print(f"A.cumsum(axis=0) = \n{A.cumsum(axis=0)}")
