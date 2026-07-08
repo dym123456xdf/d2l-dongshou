@@ -19,7 +19,7 @@ print(f"x * y = {x * y}")
 # 除法: 3.0 / 2.0 = 1.5
 print(f"x / y = {x / y}")
 # 幂运算: 3.0 ** 2.0 = 9.0
-print(f"x**y = {x**y}")
+print(f"x**y = {x ** y}")
 
 # =============================================================================
 # 第2节：torch.arange() 创建序列张量
@@ -143,19 +143,18 @@ A = torch.arange(20).reshape(5, 4)
 print(f"A = \n{A}")
 A_sum_axis0 = A.sum(axis=0)
 print(f"A = \n{A}")
-print(f"A.sum(axis=0) = {A_sum_axis0}")       # 每列求和
+print(f"A.sum(axis=0) = {A_sum_axis0}")  # 每列求和
 print(f"A_sum_axis0.shape = {A_sum_axis0.shape}")
 
 # axis=1：沿第1维（行）求和，结果形状 (5, 4) -> (5,)
 #         即每行的元素相加，得到每行的总和
 
 A_sum_axis1 = A.sum(axis=1)
-print(f"A.sum(axis=1) = {A_sum_axis1}")       # 每行求和
+print(f"A.sum(axis=1) = {A_sum_axis1}")  # 每行求和
 print(f"A_sum_axis1.shape = {A_sum_axis1.shape}")
 
 # axis=[0, 1]：同时沿两个轴求和，结果为标量，等价于 A.sum()
 print(f"A.sum(axis=[0, 1]) = {A.sum(axis=[0, 1])}")
-
 
 # =============================================================================
 # 第10节：均值与非均值求和
@@ -168,11 +167,11 @@ print("第10节：均值与非均值求和")
 print("=" * 60)
 A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
 print(f"A = \n{A}")
-print(f"A.mean() = {A.mean()}")                      # 所有元素的平均值
+print(f"A.mean() = {A.mean()}")  # 所有元素的平均值
 print(f"A.sum() / A.numel() = {A.sum() / A.numel()}")  # 验证均值
 
 # 按axis=0（列）求均值，验证：mean(axis=0) 等于 sum(axis=0) / shape[0]
-print(f"A.mean(axis=0) = {A.mean(axis=0)}")                    # 每列均值
+print(f"A.mean(axis=0) = {A.mean(axis=0)}")  # 每列均值
 print(f"A.sum(axis=0) / A.shape[0] = {A.sum(axis=0) / A.shape[0]}")  # 验证
 
 # =============================================================================
@@ -213,16 +212,44 @@ x = torch.arange(4, dtype=torch.float32)
 y = torch.ones(4, dtype=torch.float32)
 print(f"x = {x}")
 print(f"y = {y}")
-print(f"torch.dot(x, y) = {torch.dot(x, y)}")          # 1*4 + 2*5 + 3*6 = 32
-print(f"torch.sum(x * y) = {torch.sum(x * y)}")        # 验证：结果相同
+print(f"torch.dot(x, y) = {torch.dot(x, y)}")  # 1*4 + 2*5 + 3*6 = 32
+print(f"torch.sum(x * y) = {torch.sum(x * y)}")  # 验证：结果相同
 
+# =============================================================================
+# 第13节：矩阵-向量积（Matrix-Vector Product）
+# =============================================================================
+# torch.mv(A, x) 计算矩阵A与向量x的乘积
+# 矩阵A的列数必须等于向量x的元素个数
+# 结果是一个向量，形状为 A的行数
 
-
+print("\n" + "=" * 60)
+print("第13节：矩阵-向量积（Matrix-Vector Product）")
+print("=" * 60)
 A = torch.arange(20, dtype=torch.float32).reshape(5, 4)
+x = torch.tensor([1, 2, 3, 4], dtype=torch.float32)
 print(f"A = \n{A}")
-x = torch.arange(4, dtype=torch.float32)
 print(f"x = {x}")
+print(f"A.shape = {A.shape}")  # (5, 4)
+print(f"x.shape = {x.shape}")  # (4,)
+print(f"torch.mv(A, x) = {torch.mv(A, x)}")
+# 计算过程：每行与x点积
+# 第0行: 0*1 + 1*2 + 2*3 + 3*4 = 0+2+6+12 = 20
 
+# =============================================================================
+# 第14节：矩阵-矩阵乘法（Matrix-Matrix Multiplication）
+# =============================================================================
+# torch.mm(A, B) 计算矩阵A与矩阵B的乘积
+# A的列数必须等于B的行数
+# 结果形状：(A的行数, B的列数)
 
-
-
+print("\n" + "=" * 60)
+print("第14节：矩阵-矩阵乘法（Matrix-Matrix Multiplication）")
+print("=" * 60)
+A = torch.arange(6, dtype=torch.float32).reshape(2, 3)   # 2x3矩阵
+B = torch.arange(12, dtype=torch.float32).reshape(3, 4)  # 3x4矩阵
+print(f"A = \n{A}")
+print(f"A.shape = {A.shape}")      # (2, 3)
+print(f"B = \n{B}")
+print(f"B.shape = {B.shape}")      # (3, 4)
+print(f"torch.mm(A, B) = \n{torch.mm(A, B)}")  # 2x4矩阵
+print(f"torch.mm(A, B).shape = {torch.mm(A, B).shape}")
