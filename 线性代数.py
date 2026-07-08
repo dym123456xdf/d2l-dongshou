@@ -253,3 +253,26 @@ print(f"B = \n{B}")
 print(f"B.shape = {B.shape}")      # (3, 4)
 print(f"torch.mm(A, B) = \n{torch.mm(A, B)}")  # 2x4矩阵
 print(f"torch.mm(A, B).shape = {torch.mm(A, B).shape}")
+
+# =============================================================================
+# 第15节：L1范数与L2范数
+# =============================================================================
+# L1范数：向量元素绝对值之和，即 torch.abs(u).sum()
+# L2范数：向量元素的平方和再开方，即 torch.norm(u)
+# 范数衡量向量的大小/长度
+
+print("\n" + "=" * 60)
+print("第15节：L1范数与L2范数")
+print("=" * 60)
+u = torch.tensor([3.0, -4.0])
+print(f"u = {u}")
+print(f"torch.norm(u) (L2范数) = {torch.norm(u)}")           # sqrt(3^2 + (-4)^2) = 5
+print(f"torch.abs(u).sum() (L1范数) = {torch.abs(u).sum()}") # |3| + |-4| = 7
+
+# 全1矩阵的L2范数：sqrt(m * n)，m行n列的矩阵，每个元素都是1
+print(f"\ntorch.ones((4, 9)) = \n{torch.ones((4, 9))}")
+print(f"torch.norm(torch.ones((4, 9))) = {torch.norm(torch.ones((4, 9)))}")  # sqrt(4*9) = 6
+
+print("\n" + "=" * 60)
+print("全部内容打印完毕")
+print("=" * 60)
