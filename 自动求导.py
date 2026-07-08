@@ -104,10 +104,7 @@ z = u * x                # z = u * x，但u不会产生梯度
 print(f"y = x * x = {y}")
 print(f"u = y.detach() = {u}")
 print(f"z = u * x = {z}")
-
-# z.sum().backward() 前清除梯度
-x.grad.zero_()
-print(f"x.grad.zero_() 后 x.grad = {x.grad}")
+print(f"x.grad = {x.grad}")
 
 # 反向传播：z = u*x，u为常数，dz/dx = u
 z.sum().backward()
