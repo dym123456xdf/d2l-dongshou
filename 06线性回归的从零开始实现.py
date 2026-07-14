@@ -80,7 +80,8 @@ print(f"第一个样本标签: {labels[0]}")
 # features[:, 1] 取所有样本的第2列特征（索引从0开始）
 d2l.set_figsize()  # 设置matplotlib图形大小
 d2l.plt.scatter(features[:, 1].detach().numpy(),
-                labels.detach().numpy(), 1)  # 绘制散点图，点大小为1
+                labels.detach().numpy(),
+                1)  # 绘制散点图，点大小为1
 d2l.plt.show()  # 显示图形
 
 
